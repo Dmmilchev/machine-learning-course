@@ -91,17 +91,18 @@ def modify(xor, learning_rate, eps, dataset):
     eps_and_w2.and_w2 += eps
 
     #calculating derivative
-    der_or_bias = (calculate_loss(eps_or_bias, dataset) - calculate_loss(xor, dataset)) / eps
-    der_or_w1 = (calculate_loss(eps_or_w1, dataset) - calculate_loss(xor, dataset)) / eps
-    der_or_w2 = (calculate_loss(eps_or_w2, dataset) - calculate_loss(xor, dataset)) / eps
+    starting_loss = calculate_loss(xor, dataset)
+    der_or_bias = (calculate_loss(eps_or_bias, dataset) - starting_loss) / eps
+    der_or_w1 = (calculate_loss(eps_or_w1, dataset) - starting_loss) / eps
+    der_or_w2 = (calculate_loss(eps_or_w2, dataset) - starting_loss) / eps
     
-    der_nand_bias = (calculate_loss(eps_nand_bias, dataset) - calculate_loss(xor, dataset)) / eps
-    der_nand_w1 = (calculate_loss(eps_nand_w1, dataset) - calculate_loss(xor, dataset)) / eps
-    der_nand_w2 = (calculate_loss(eps_nand_w2, dataset) - calculate_loss(xor, dataset)) / eps
+    der_nand_bias = (calculate_loss(eps_nand_bias, dataset) - starting_loss) / eps
+    der_nand_w1 = (calculate_loss(eps_nand_w1, dataset) - starting_loss) / eps
+    der_nand_w2 = (calculate_loss(eps_nand_w2, dataset) - starting_loss) / eps
     
-    der_and_bias = (calculate_loss(eps_and_bias, dataset) - calculate_loss(xor, dataset)) / eps
-    der_and_w1 = (calculate_loss(eps_and_w1, dataset) - calculate_loss(xor, dataset)) / eps
-    der_and_w2 = (calculate_loss(eps_and_w2, dataset) - calculate_loss(xor, dataset)) / eps
+    der_and_bias = (calculate_loss(eps_and_bias, dataset) - starting_loss) / eps
+    der_and_w1 = (calculate_loss(eps_and_w1, dataset) - starting_loss) / eps
+    der_and_w2 = (calculate_loss(eps_and_w2, dataset) - starting_loss) / eps
     
     #initializing the new model
     new_model = Xor()

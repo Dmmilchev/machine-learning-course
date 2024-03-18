@@ -45,9 +45,10 @@ def main() -> None:
     epochs = 10_0000
 
     for _ in range(epochs):
-        der_loss_w1 = (calculate_loss(w1 + eps, w2, bias, and_dataset) - calculate_loss(w1, w2, bias, and_dataset))/eps
-        der_loss_w2 = (calculate_loss(w1, w2 + eps, bias, and_dataset) - calculate_loss(w1, w2, bias, and_dataset))/eps
-        der_loss_bias = (calculate_loss(w1, w2, bias + eps, and_dataset) - calculate_loss(w1, w2, bias, and_dataset))/eps
+        starting_loss = calculate_loss(w1, w2, bias, and_dataset)
+        der_loss_w1 = (calculate_loss(w1 + eps, w2, bias, and_dataset) - starting_loss)/eps
+        der_loss_w2 = (calculate_loss(w1, w2 + eps, bias, and_dataset) - starting_loss)/eps
+        der_loss_bias = (calculate_loss(w1, w2, bias + eps, and_dataset) - starting_loss)/eps
 
         w1 -= learning_rate * der_loss_w1
         w2 -= learning_rate * der_loss_w2
@@ -65,9 +66,10 @@ def main() -> None:
     bias = initialize_weights(0, 3)
   
     for _ in range(epochs):
-        der_loss_w1 = (calculate_loss(w1 + eps, w2, bias, or_dataset) - calculate_loss(w1, w2, bias, or_dataset))/eps
-        der_loss_w2 = (calculate_loss(w1, w2 + eps, bias, or_dataset) - calculate_loss(w1, w2, bias, or_dataset))/eps
-        der_loss_bias = (calculate_loss(w1, w2, bias + eps, or_dataset) - calculate_loss(w1, w2, bias, or_dataset))/eps
+        starting_loss = calculate_loss(w1, w2, bias, or_dataset)
+        der_loss_w1 = (calculate_loss(w1 + eps, w2, bias, or_dataset) - starting_loss)/eps
+        der_loss_w2 = (calculate_loss(w1, w2 + eps, bias, or_dataset) - starting_loss)/eps
+        der_loss_bias = (calculate_loss(w1, w2, bias + eps, or_dataset) - starting_loss)/eps
 
         w1 -= learning_rate * der_loss_w1
         w2 -= learning_rate * der_loss_w2  
