@@ -16,30 +16,38 @@ class Value:
         return value
     
 
-def trace_rec(curr : Value, visited : set):
-    if len(curr.prev) == 0:
-        return set([curr])
+def trace_rec(node : Value, nodes : set, edges : set) -> tuple[set, set]:
+    nodes.add(node)
     
-    visited.add(curr)
-    result = set([curr])
+    if len(node.prev) == 0:
+        return nodes, edges
     
-    for element in curr.prev:
+    res_nodes = set([node])
+    res_edges = set()
+    nodes.add(node)
+    
+    for element in node.prev:
+        edges.add((node, element))
+        rec_nodes, rec_edges = trace_rec(element, nodes, edges)
         
-        result = result | trace_rec(element, visited)
+        res_nodes = res_nodes | rec_nodes
+        res_edges = res_edges | rec_edges
         
-    return result
-        
-        
-def trace(node : Value):
-    return trace_rec(node, set([node]))    
+    return res_nodes, res_edges
     
     
+def trace(node: Value) -> tuple[set, set]:
+    return trace_rec(node, set(), set())
+
+
 def main() -> None:
     x = Value(2.0)
     y = Value(-3.0)
     z = Value(10.0)
     result = x * y + z
 
-    print(trace(result))
-    
+    nodes, edges = trace(result)
+    print(f'{nodes=}')
+    print(f'{edges=}')
+
 main()
