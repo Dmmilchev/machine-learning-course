@@ -1,11 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+#Here we plot how loss is changing with every epoch. We are using sigmoid function here.
+
 def create_dataset_and() -> list[(int, int, int)]:
    return [(0, 0, 0), 
            (0, 1, 0), 
            (1, 0, 0),
            (1, 1, 1)]
+
 
 def create_dataset_or() -> list[(int, int, int)]:
     return [(0, 0, 0), 
@@ -13,11 +16,14 @@ def create_dataset_or() -> list[(int, int, int)]:
            (1, 0, 1),
            (1, 1, 1)]
 
+
 def initialize_weights(x : int, y : int) -> float:
     return np.random.uniform(x, y)
 
+
 def sigmoid(x : float) -> float:
     return 1 / (1 + np.exp(-x))
+
 
 def calculate_loss(w1 : int, w2 : int, bias : int, dataset : list[(int, int, int)]) -> float:
     sum = 0
@@ -26,6 +32,7 @@ def calculate_loss(w1 : int, w2 : int, bias : int, dataset : list[(int, int, int
         actual = sigmoid(x*w1 + y*w2 + bias)
         sum += (actual - expected) ** 2
     return sum / n
+
 
 def main() -> None:
     and_dataset = create_dataset_and()
@@ -61,6 +68,7 @@ def main() -> None:
     axes = fig.add_axes([0, 0, 1, 1])
     axes.plot(plot_x, plot_y, color = 'blue')
     plt.show()
+    
     
 if __name__ == '__main__':
     main()
