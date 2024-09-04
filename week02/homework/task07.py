@@ -1,13 +1,16 @@
 import numpy as np
 
+
 def create_nand_training_set() -> list[(int, int, int)]:
     return [(0, 0, 1),
             (0, 1, 1),
             (1, 0, 1),
             (1, 1, 0)]
     
+    
 def initialize_weights(low : float, high : float) -> float:
     return np.random.uniform(low, high)
+
 
 def calculate_loss(w1 : float, w2 : float, bias : float, training_set : list[(int, int, int)]) -> float:
     sum = 0
@@ -18,6 +21,7 @@ def calculate_loss(w1 : float, w2 : float, bias : float, training_set : list[(in
         sum += (actual - expected)**2
         
     return sum / n
+
 
 def main() -> None:
     nand_training_set = create_nand_training_set()
@@ -41,6 +45,7 @@ def main() -> None:
     for i in range(2):
         for j in range(2):
             print(i, j, w1 * i + w2 * j + bias)
+            
             
 if __name__ == '__main__':
     main()

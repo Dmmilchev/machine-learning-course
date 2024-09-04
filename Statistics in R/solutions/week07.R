@@ -12,4 +12,42 @@ x <- reacttime$before
 y <- reacttime$after
 t.test(x, y, alternative="greater")
 
-# task 74
+# task 75
+# а) Двойка наблюдения
+# б) Независими извадки
+# в) Двойка наблюдения
+# г) Независими извадки
+
+# task 76
+n = 500
+
+sim.equality <- function() {
+  x <- rnorm(n, 5, 1)
+  y <- rnorm(n, 5, 0.8)
+  t.test(x, y)$p.value
+}
+
+res <- replicate(10000, sim.equality())
+sum(res <= 0.05) / length(res)
+
+# task 77
+n = 500
+
+sim.equality2 <- function() {
+  x <- rnorm(n, 5, 1)
+  y <- rnorm(n, 5.2, 1)
+  t.test(x, y)$p.value
+}
+
+res <- replicate(10000, sim.equality2())
+sum(res <= 0.05) / length(res)
+
+# task 78
+x <- c(26, 43)
+n <- c(500, 540)
+prop.test( x=x, n=n, alternative="less", correct=FALSE)
+
+# task 79
+x <- c(1.2, 1.3, 1.5, 1.4, 1.7, 1.8, 1.4, 1.3)
+y <- c(1.4, 1.7, 1.5, 1.3, 2.0, 2.1, 1.7, 1.6)
+t.test(x, y)$p.value
